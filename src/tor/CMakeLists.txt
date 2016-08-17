@@ -147,6 +147,8 @@ aux_source_directory(${TOR_ROOT_DIR}/src/trunnel tortrunnel_sources)
 aux_source_directory(${LIBQUIC_ROOT_DIR}/src/quux/server QUUX_DISPATCHER_SOURCES)
 
 add_definitions(-DSHADOW=1 -DQUUX_LOG=1)
+# For Protobuf
+add_definitions(-DHAVE_PTHREAD)
 # For boringssl - NB. since we compiled bsslcrypto separately, this
 # actually has to be done in libquic's cmake
 add_definitions(-DOPENSSL_NO_THREADS)
@@ -180,6 +182,56 @@ add_shadow_plugin(shadow-plugin-tor
 
     ${LIBQUIC_ROOT_DIR}/src/quux/api.cc
     ${QUUX_DISPATCHER_SOURCES}
+
+
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/arena.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/arena.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/arenastring.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/arenastring.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/extension_set.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/extension_set.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/generated_message_util.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/generated_message_util.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/io/coded_stream.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/io/coded_stream.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/io/coded_stream_inl.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/io/zero_copy_stream.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/io/zero_copy_stream.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/message_lite.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/message_lite.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/repeated_field.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/repeated_field.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_arm_gcc.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_atomicword_compat.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_macosx.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_mips_gcc.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_gcc.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_gcc.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_msvc.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_msvc.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/common.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/common.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/structurally_valid.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/common.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/hash.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/map_util.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/once.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/once.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/status.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/status.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/int128.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/int128.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/stringprintf.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/stringprintf.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/stubs/platform_macros.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/unknown_field_set.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/unknown_field_set.h
+    ${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/wire_format_lite.cc
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/wire_format_lite.h
+    #${LIBQUIC_ROOT_DIR}/src/third_party/protobuf/src/google/protobuf/wire_format_lite_inl.h
 
 
     ${LIBQUIC_ROOT_DIR}/src/net/quic/proto/cached_network_parameters.pb.cc
@@ -270,7 +322,7 @@ add_shadow_plugin(shadow-plugin-tor
     ${LIBQUIC_ROOT_DIR}/src/net/quic/quic_stream_sequencer_buffer.cc
     ${LIBQUIC_ROOT_DIR}/src/net/quic/quic_server_session_base.cc
 
-    ${LIBQUIC_ROOT_DIR}/src/net/base/int128.cc
+    ${LIBQUIC_ROOT_DIR}/src/net/base/base_int128.cc
     ${LIBQUIC_ROOT_DIR}/src/net/base/escape.cc
     ${LIBQUIC_ROOT_DIR}/src/net/base/net_errors.cc
     ${LIBQUIC_ROOT_DIR}/src/net/base/ip_address.cc
@@ -280,7 +332,7 @@ add_shadow_plugin(shadow-plugin-tor
     ${LIBQUIC_ROOT_DIR}/src/net/base/port_util.cc
     ${LIBQUIC_ROOT_DIR}/src/net/base/url_util2.cc
     ${LIBQUIC_ROOT_DIR}/src/net/base/parse_number.cc
-    ${LIBQUIC_ROOT_DIR}/src/net/base/arena.cc
+    ${LIBQUIC_ROOT_DIR}/src/net/base/base_arena.cc
 
     ${LIBQUIC_ROOT_DIR}/src/net/spdy/spdy_frame_reader.cc
     ${LIBQUIC_ROOT_DIR}/src/net/spdy/spdy_frame_builder.cc
@@ -334,7 +386,7 @@ add_shadow_plugin(shadow-plugin-tor
     ${LIBQUIC_ROOT_DIR}/src/base/strings/string_util.cc
     ${LIBQUIC_ROOT_DIR}/src/base/strings/string_number_conversions.cc
     ${LIBQUIC_ROOT_DIR}/src/base/strings/string_util_constants.cc
-    ${LIBQUIC_ROOT_DIR}/src/base/strings/stringprintf.cc
+    ${LIBQUIC_ROOT_DIR}/src/base/strings/base_stringprintf.cc
     ${LIBQUIC_ROOT_DIR}/src/base/strings/string_split.cc
     ${LIBQUIC_ROOT_DIR}/src/base/strings/string16.cc
     ${LIBQUIC_ROOT_DIR}/src/base/strings/utf_string_conversion_utils.cc
@@ -438,7 +490,6 @@ add_shadow_plugin(shadow-plugin-tor
 add_dependencies(shadow-plugin-tor shadow-preload-tor)
 
 target_link_libraries(shadow-plugin-tor shadow-preload-tor
-    ${LIBQUIC_ROOT_DIR}/build/protobuf/libprotobuf.a
     ${LIBQUIC_ROOT_DIR}/build/boringssl/crypto/libbsslcrypto.a
     ${TOR_LIBRARIES} ${GLIB_LIBRARIES} ${EVENT2_LIBRARIES} ${OPENSSL_LIBRARIES} 
     ${ZLIB_LIBRARIES} ${M_LIBRARIES} ${RT_LIBRARIES} ${DL_LIBRARIES} -lpthread)
