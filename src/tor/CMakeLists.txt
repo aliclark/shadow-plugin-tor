@@ -147,6 +147,10 @@ aux_source_directory(${TOR_ROOT_DIR}/src/trunnel tortrunnel_sources)
 aux_source_directory(${LIBQUIC_ROOT_DIR}/src/quux/server QUUX_DISPATCHER_SOURCES)
 
 add_definitions(-DSHADOW=1 -DQUUX_LOG=1)
+# For boringssl - NB. since we compiled bsslcrypto separately, this
+# actually has to be done in libquic's cmake
+add_definitions(-DOPENSSL_NO_THREADS)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 ## get tor header files -- we dont need this for now
