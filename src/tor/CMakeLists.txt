@@ -146,7 +146,7 @@ aux_source_directory(${TOR_ROOT_DIR}/src/trunnel tortrunnel_sources)
 
 aux_source_directory(${LIBQUIC_ROOT_DIR}/src/quux/server QUUX_DISPATCHER_SOURCES)
 
-add_definitions(-DSHADOW=1 -DQUUX_LOG=1)
+add_definitions(-DSHADOW=1)
 # For Protobuf
 add_definitions(-DHAVE_PTHREAD)
 # For boringssl - NB. since we compiled bsslcrypto separately, this
